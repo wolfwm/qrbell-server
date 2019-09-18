@@ -1,4 +1,3 @@
-var lang = navigator.language.split('-')[0]
 var hasPwd = ''
 var pwd = ''
 var name = ''
@@ -112,26 +111,6 @@ function sendData() {
 }
 
 $(document).ready(() => {
-    switch (lang) {
-        case "en":
-            lang = 0
-            break;
-        case "pt":
-            lang = 1
-            break;
-        case "es":
-            lang = 2
-            break;
-        case "de":
-            lang = 3
-            break;
-        case "fr":
-            lang = 4
-            break;
-        default:
-            lang = 0
-    }
-
     $("#name_label_id").text(strings['s_your_name'][lang])
     $("#name_box_id").attr("placeholder", strings['s_name'][lang])
     $("#password_label_id").text(strings['s_doorbell_password'][lang])
