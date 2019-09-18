@@ -1,0 +1,47 @@
+* {
+    text-align: center;
+}
+
+html, body {
+    min-height: 100vh;
+    background-color: #FF9500;
+    background-image: linear-gradient(to bottom right, #FFC700, #FF9500, #FF9500);
+    background-repeat: no-repeat;
+}
+
+#background_img_id {
+    height: 100vh;
+    background-image: url(/images/Filled\ Bell\ Exclamation\ Mark\ Hole.svg);
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 60%;
+    background-size: 70vmin;
+}
+
+h1 {
+    color: #F4F4F4;
+}
+
+.textual_class {
+    color: #F4F4F4;
+}
+
+.text_box_class {
+    border: 0;
+}
+
+#send_btn_id {
+    color: #FF9500;
+    background-color: #F4F4F4;
+    border: 0;
+    font-size: 1.3rem;
+}
+
+.password_class {
+    display: none;
+}
+
+#send_btn_id[disabled=disabled], #send_btn_id:disabled {
+    color: rgba(255, 149, 0, 0.500);
+    background-color: rgba(244, 244, 244, 0.750);
+} 
