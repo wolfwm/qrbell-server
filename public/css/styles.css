@@ -4,8 +4,8 @@
 
 html, body {
     min-height: 100vh;
-    background-color: #FF9500;
-    background-image: linear-gradient(to bottom right, #FFC700, #FF9500, #FF9500);
+    background-color: #37808F;
+    background-image: linear-gradient(to bottom right, #48A7BB, #37808F, #37808F);
     background-repeat: no-repeat;
 }
 
@@ -31,7 +31,7 @@ h1 {
 }
 
 #send_btn_id {
-    color: #FF9500;
+    color: #37808F;
     background-color: #F4F4F4;
     border: 0;
     font-size: 1.3rem;
@@ -42,6 +42,6 @@ h1 {
 }
 
 #send_btn_id[disabled=disabled], #send_btn_id:disabled {
-    color: rgba(255, 149, 0, 0.500);
+    color: rgba(55, 128, 143, 0.500);
     background-color: rgba(244, 244, 244, 0.750);
 } 

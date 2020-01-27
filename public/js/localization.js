@@ -1,3 +1,27 @@
+var lang = navigator.language.split('-')[0]
+
+$(document).ready(() => {
+  switch (lang) {
+    case "en":
+        lang = 0
+        break;
+    case "pt":
+        lang = 1
+        break;
+    case "es":
+        lang = 2
+        break;
+    case "de":
+        lang = 3
+        break;
+    case "fr":
+        lang = 4
+        break;
+    default:
+        lang = 0
+  }
+})
+
 const strings = {
   s_your_name: [
     "Your name",
