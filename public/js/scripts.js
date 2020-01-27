@@ -99,6 +99,7 @@ function sendData() {
 
                 // console.log(msg)
                 window.alert(msg)
+                $("#send_btn_id").prop('disabled', false)
             }).catch((err) => {
                 $("#send_btn_id").prop('disabled', false)
 

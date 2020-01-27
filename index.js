@@ -25,24 +25,24 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
     console.log();
   };
 
-  container.setUpAuth()
-    .then(function() {
-      return database.performQuery({ recordType: 'GrupoCampainha'});
-    })
-    .then(function(response) {
-      var record = response;
-      println("Queried Records", record);
-    })
-    .then(function() {
-      return database.performQuery({ recordType: 'Notification'});
-    })
-    .then(function(response) {
-      var record = response;
-      println("Queried Records", record);
-    })
-    .catch(function(error) {
-      console.warn(error);
-    });
+  // container.setUpAuth()
+  //   .then(function() {
+  //     return database.performQuery({ recordType: 'GrupoCampainha'});
+  //   })
+  //   .then(function(response) {
+  //     var record = response;
+  //     println("Queried Records", record);
+  //   })
+  //   .then(function() {
+  //     return database.performQuery({ recordType: 'Notification'});
+  //   })
+  //   .then(function(response) {
+  //     var record = response;
+  //     println("Queried Records", record);
+  //   })
+  //   .catch(function(error) {
+  //     console.warn(error);
+  //   });
 
   var express = require('express')
   var app = express()
@@ -118,8 +118,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
 
       users.forEach(usrID => {usrIDs.push(usrID.recordName)})
       
-      println("Fetched Record", fetchedRecord);
-      println("Fetched Record", fetchedRecord);
+      // println("Fetched Record", fetchedRecord);
 
       return database.fetchRecords(fetchedRecord.fields.Campainha.value.recordName);
     })
