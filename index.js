@@ -25,24 +25,24 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
     console.log();
   };
 
-  // container.setUpAuth()
-  //   .then(function() {
-  //     return database.performQuery({ recordType: 'GrupoCampainha'});
-  //   })
-  //   .then(function(response) {
-  //     var record = response;
-  //     println("Queried Records", record);
-  //   })
-  //   .then(function() {
-  //     return database.performQuery({ recordType: 'Notification'});
-  //   })
-  //   .then(function(response) {
-  //     var record = response;
-  //     println("Queried Records", record);
-  //   })
-  //   .catch(function(error) {
-  //     console.warn(error);
-  //   });
+  container.setUpAuth()
+    .then(function() {
+      return database.performQuery({ recordType: 'GrupoCampainha'});
+    })
+    .then(function(response) {
+      var record = response;
+      println("Queried Records", record);
+    })
+    .then(function() {
+      return database.performQuery({ recordType: 'Notification'});
+    })
+    .then(function(response) {
+      var record = response;
+      println("Queried Records", record);
+    })
+    .catch(function(error) {
+      console.warn(error);
+    });
 
   var express = require('express')
   var app = express()
@@ -100,8 +100,9 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
 
     var groupPassword
     var doorbellName
+    var usrIDs = []
 
-    var record
+    var records = []
 
     container.setUpAuth()
     .then(function() {
@@ -109,12 +110,16 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
     })
     .then(function(response) {
       var fetchedRecord = response.records[0];
+      var users = fetchedRecord.fields.Usuarios.value
 
       if ('Senha' in fetchedRecord.fields) {
         groupPassword = fetchedRecord.fields.Senha.value;
       }
+
+      users.forEach(usrID => {usrIDs.push(usrID.recordName)})
       
-      // println("Fetched Record", fetchedRecord);
+      println("Fetched Record", fetchedRecord);
+      println("Fetched Record", fetchedRecord);
 
       return database.fetchRecords(fetchedRecord.fields.Campainha.value.recordName);
     })
@@ -122,28 +127,18 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
       var fetchedRecord = response.records[0];
       doorbellName = fetchedRecord.fields.Titulo.value
 
-      if (!groupPassword || groupPassword == '') {
-        record = {
-          recordType: 'Notification',
-          fields: {
-              NomeVisitante: { value: visitorName, type: 'STRING' },
-              NomeCampainha: { value: doorbellName, typre: 'STRING'},
-              idGrupo: { value: { recordName: groupID, action: 'NONE' }, type: 'REFERENCE' }
-          }
-        };
-
-        res.json({
-          msg: 'success'
-        })
-      } else if (password == groupPassword) {
-        record = {
-          recordType: 'Notification',
-          fields: {
-              NomeVisitante: { value: visitorName, type: 'STRING' },
-              NomeCampainha: { value: doorbellName, typre: 'STRING'},
-              idGrupo: { value: { recordName: groupID, action: 'NONE' }, type: 'REFERENCE' }
-          }
-        };
+      if (!groupPassword || groupPassword == '' || groupPassword == password) {
+        usrIDs.forEach(usrID => {
+          records.push({
+            recordType: 'Notification',
+            fields: {
+                NomeVisitante: { value: visitorName, type: 'STRING'},
+                NomeCampainha: { value: doorbellName, type: 'STRING'},
+                idGrupo: { value: { recordName: groupID, action: 'NONE'}, type: 'REFERENCE'},
+                idUsuario: { value: { recordName: usrID, action: 'NONE'}, type: 'REFERENCE'}
+            }
+          })
+        });
 
         res.json({
           msg: 'success'
@@ -156,7 +151,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
 
       // println("Fetched Record", fetchedRecord);
 
-      return record
+      return records
     })
     .then(function(response) {
       if (!groupPassword || groupPassword == '' || password == groupPassword) {
