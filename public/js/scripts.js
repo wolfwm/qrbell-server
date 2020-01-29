@@ -138,6 +138,7 @@ $(document).ready(() => {
                         if (hasPwd == 'not found') {
                             console.log(strings['s_doorbell_not_found'][lang])
                             window.alert(strings['s_doorbell_not_found'][lang])
+                            $("#send_btn_id").prop('disabled', true)
                         }
                     } else {
                         $(".password_class").show()
